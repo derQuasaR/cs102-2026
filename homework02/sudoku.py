@@ -27,12 +27,7 @@ def display(grid: tp.List[tp.List[str]]) -> None:
     width = 2
     line = "+".join(["-" * (width * 3)] * 3)
     for row in range(9):
-        print(
-            "".join(
-                grid[row][col].center(width) + ("|" if str(col) in "25" else "")
-                for col in range(9)
-            )
-        )
+        print("".join(grid[row][col].center(width) + ("|" if str(col) in "25" else "") for col in range(9)))
         if str(row) in "25":
             print(line)
     print()
@@ -130,9 +125,7 @@ def find_empty_positions(
     return None
 
 
-def find_possible_values(
-    grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]
-) -> tp.Set[str]:
+def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.Set[str]:
     """Вернуть множество возможных значения для указанной позиции
     >>> grid = read_sudoku('puzzle1.txt')
     >>> values = find_possible_values(grid, (0,2))
@@ -276,9 +269,7 @@ def generate_sudoku(n: int) -> tp.List[tp.List[str]]:
         col = rd.randint(0, 8)
         digit = str(rd.randint(1, 9))
 
-        if grid[row][col] == "." and digit in find_possible_values(
-            grid, pos=(row, col)
-        ):
+        if grid[row][col] == "." and digit in find_possible_values(grid, pos=(row, col)):
             grid[row][col] = digit
             seed_cnt += 1
 
